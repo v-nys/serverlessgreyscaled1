@@ -5,6 +5,8 @@ on:
 
 jobs:
   build:
+    env:
+      OPENFAAS_URL: "https://jaws2paws.com"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
