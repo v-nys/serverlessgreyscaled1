@@ -16,6 +16,7 @@ jobs:
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      # effectief bouwen van de functie zoals je dat lokaal doet
-      - name: Build function only
-        run: faas-cli build -f greyscaledeen.yml
+      - name: Login to faasd
+        run: faas-cli login -u ${{ secrets.FAASD_USER }} --password ${{ secrets.FAASD_PASSWORD }}
+      - name: Deploy function
+        run: faas-cli up -f greyscaledeen.yml
