@@ -1,0 +1,11 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: https://jaws2paws.com
+functions:
+  greyscaledeen:
+    lang: node18
+    handler: ./greyscaledeen
+    image: vincentnys/greyscaledeen:latest
+    env:
+      - NODE_ENV: "production"
