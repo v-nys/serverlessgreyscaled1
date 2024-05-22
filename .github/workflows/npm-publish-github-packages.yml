@@ -20,5 +20,11 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Login to faasd
         run: faas-cli login -u ${{ secrets.FAASD_USER }} --password ${{ secrets.FAASD_PASSWORD }}
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          username: vincentnys
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Deploy function
         run: faas-cli up -f greyscaledeen.yml
