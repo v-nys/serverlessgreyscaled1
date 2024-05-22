@@ -1,0 +1,21 @@
+name: Deploy serverless function on faasd
+
+on:
+  push: ~
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # nodig om commando's te kunnen uitvoeren
+      - name: Download and install faas-cli
+        run: curl -sLSf https://cli.openfaas.com | sudo sh
+      # vereist om Docker images te kunnen bouwen
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      # effectief bouwen van de functie zoals je dat lokaal doet
+      - name: Build function only
+        run: faas-cli build -f greyscaledeen.yml
